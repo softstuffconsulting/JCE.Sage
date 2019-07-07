@@ -6,6 +6,6 @@
     <title></title>
 </head>
 <body style="overflow:hidden">
-    <iframe id="sagepay" src="" width="690px" height="690px" runat="server"></iframe>
+    <asp:HtmlIframe id="sagepay" src="" width="690px" height="690px" runat="server"></asp:HtmlIframe>
 </body>
 </html>
