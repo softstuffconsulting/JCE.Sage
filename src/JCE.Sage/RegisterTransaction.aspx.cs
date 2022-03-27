@@ -30,6 +30,7 @@ namespace JCE.Sage
             }
             
             CrmConnector connector = new CrmConnector(Properties.Settings.Default.ConnectionString);
+            if(!connector.isReady()) Response.Redirect(configuration.OrderFailedUrl + "?errorcode=" + (int)ErrorCodes.ErrorWithCRM);
             PaymentProvider paymentProvider = new PaymentProvider(connector);
             var payment = paymentProvider.GetPayment(paymentId);
 

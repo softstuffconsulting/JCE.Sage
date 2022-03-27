@@ -21,6 +21,8 @@ namespace JCE.Sage
 
             ConfigurationProvider configuration = new ConfigurationProvider();
             CrmConnector connector = new CrmConnector(Properties.Settings.Default.ConnectionString);
+            if(!connector.isReady()) { HandleError(configuration, ErrorCodes.TransactionNotFound,connector.errorCode()); return; }
+
             PaymentProvider paymentProvider = new PaymentProvider(connector);
 
             // Check we have a payment for the transaction code and id
@@ -194,7 +196,7 @@ namespace JCE.Sage
         /// </summary>
         /// <param name="configuration">The configuration.</param>
         /// <param name="errorCode">The error code.</param>
-        private void HandleError(ConfigurationProvider configuration, ErrorCodes errorCode)
+        private void HandleError(ConfigurationProvider configuration, ErrorCodes errorCode, string additionalInfo="")
         {
             string statusDetail = String.Empty;
             switch (errorCode)
@@ -209,6 +211,8 @@ namespace JCE.Sage
                     statusDetail = "An unknown error occurred.";
                     break;
             }
+
+            if (additionalInfo != "") statusDetail = additionalInfo;
             Response.Clear();
             Response.ContentType = "text/plain";
             Response.Write("Status=INVALID" + System.Environment.NewLine);

@@ -84,5 +84,8 @@ namespace JCE.Sage.Providers
         /// The Error Code is "InvalidContactDetails"
         /// </summary>
         InvalidContactDetails = 14,
+
+
+        ErrorWithCRM=15
     }
 }

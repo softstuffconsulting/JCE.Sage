@@ -22,46 +22,46 @@
         /// <summary>
         /// The cache of organization endpoints looked up using the discovery service.
         /// </summary>
-        private static Dictionary<string, Uri> organizationEndpoints = new Dictionary<string, Uri>();
+    //    private static Dictionary<string, Uri> organizationEndpoints = new Dictionary<string, Uri>();
 
         /// <summary>
         /// The thread synchronization object - used to synchronize access to the organizationEndpoints dictionary.
         /// </summary>
-        private static object syncObj = new object();
+    //    private static object syncObj = new object();
 
         /// <summary>
         /// The current discovery service.
         /// </summary>
-        private DiscoveryServiceProxy discoveryService;
+    //    private DiscoveryServiceProxy discoveryService;
 
         /// <summary>
         /// The current organization service.
         /// </summary>
-        private OrganizationServiceProxy organizationService;
+        private IOrganizationService organizationService;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CrmConnector"/> class.
         /// </summary>
         /// <param name="configuration">The configuration provider.</param>
-     
-
 
         public CrmConnector(string CrmServiceConnectionString)
         {
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
-            CrmServiceClient conn = new CrmServiceClient(CrmServiceConnectionString);
-            OrganizationServiceProxy orgServiceProxy = conn.OrganizationServiceProxy;
-            var _crmService = (IOrganizationService)orgServiceProxy;
-            //_crmService = new OrganizationService(connection);
-            var _crmServiceContext = new OrganizationServiceContext(_crmService);
-
-         
-            this.organizationService = orgServiceProxy;
-            this.organizationService.EnableProxyTypes();
+            IOrganizationService conn = new CrmServiceClient(CrmServiceConnectionString);            
+            this.organizationService = conn;
         }
     
+        public bool isReady()
+        {
+            return ((CrmServiceClient)this.organizationService).IsReady;
+        }
 
+        public string errorCode()
+        {
+            return ((CrmServiceClient)this.organizationService).LastCrmError;
+            
+        }
         /// <summary>
         /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
         /// </summary>
@@ -80,7 +80,7 @@
         /// </returns>
         public DataContext CreateDataContext()
         {
-            return new DataContext(this.organizationService);
+           return new DataContext(this.organizationService);          
         }
 
         /// <summary>
@@ -91,20 +91,16 @@
         {
             if (disposing)
             {
-                if (this.discoveryService != null)
-                {
-                    this.discoveryService.Dispose();
-                    this.discoveryService = null;
-                }
-
+             
                 if (this.organizationService != null)
                 {
-                    this.organizationService.Dispose();
+                  ((CrmServiceClient)  this.organizationService).Dispose();
                     this.organizationService = null;
                 }
             }
         }
 
+        /*
         /// <summary>
         /// Creates the discovery service configuration.
         /// </summary>
@@ -187,7 +183,7 @@
         /// <returns>The organization's endpoint URI.</returns>
         private Uri GetOrganizationAddress(string orgName)
         {
-            Uri endpoint;
+           Uri endpoint;
             if (!organizationEndpoints.TryGetValue(orgName, out endpoint))
             {
                 lock (syncObj)
@@ -214,7 +210,8 @@
                 }
             }
 
-            return endpoint;
-        }
+            return endpoint; 
+       return null;
+        }*/
     }
 }

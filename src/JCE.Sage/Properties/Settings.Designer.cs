@@ -12,7 +12,7 @@ namespace JCE.Sage.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.0.3.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -25,8 +25,8 @@ namespace JCE.Sage.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Url=https://jcedev.crm11.dynamics.com; Username=tim@revisionteachers.onmicrosoft." +
-            "com; Password=JCETemp99; AuthType=Office365;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("AuthType=ClientSecret;ClientId=771985ae-5d8e-44fa-976e-26daa14475f0;ClientSecret=" +
+            "edd34c85-28df-4b33-b180-9624a17810c8;Url = https://jce.crm11.dynamics.com")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));

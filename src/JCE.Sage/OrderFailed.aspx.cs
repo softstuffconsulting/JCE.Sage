@@ -70,6 +70,9 @@ that your server can correctly resolve the address.";
                 case (int)ErrorCodes.InvalidContactDetails:
                     errorDescription = "The customer does not have enough contact information to take a payment.<BR/>Please ensure the customer has a <i>First</i> and <i>Last</i> name specified, and address details that include <i>Address Line 1</i>, <i>City</i> and <i>Postal Code</i>.";
                     break;
+                case (int)ErrorCodes.ErrorWithCRM:
+                    errorDescription = "An issue has occured connecting to Dynamics 365";
+                    break;
                 default:
                     errorDescription = "An unknown error has occurred.";
                     break;

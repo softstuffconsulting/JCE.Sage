@@ -68,6 +68,7 @@
         /// </returns>
         public lss_payment GetPayment(Guid paymentId)
         {
+
             using (var context = this.CrmConnector.CreateDataContext())
             {
                 return context.lss_paymentSet.FirstOrDefault(p => p.Id == paymentId);

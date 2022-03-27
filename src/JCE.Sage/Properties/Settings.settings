@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionString" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Url=https://jcedev.crm11.dynamics.com; Username=tim@revisionteachers.onmicrosoft.com; Password=JCETemp99; AuthType=Office365;</Value>
+      <Value Profile="(Default)">AuthType=ClientSecret;ClientId=771985ae-5d8e-44fa-976e-26daa14475f0;ClientSecret=edd34c85-28df-4b33-b180-9624a17810c8;Url = https://jce.crm11.dynamics.com</Value>
     </Setting>
   </Settings>
 </SettingsFile>
