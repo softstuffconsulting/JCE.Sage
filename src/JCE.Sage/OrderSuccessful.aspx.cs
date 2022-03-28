@@ -14,8 +14,8 @@ namespace JCE.Sage
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Write("<script>window.close()</script>");
-            Response.End();
+           // Response.Write("<script>window.close()</script>");
+           // Response.End();
         }
     }
 }
