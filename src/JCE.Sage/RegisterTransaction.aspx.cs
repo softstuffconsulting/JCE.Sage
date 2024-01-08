@@ -214,7 +214,7 @@ The Error is: " + webException;
                 return "INVALIDCONTACT";
             }
 
-            postRequest.Append("VPSProtocol=2.23&TxType=PAYMENT&Vendor=");
+            postRequest.Append("VPSProtocol=4.00&TxType=PAYMENT&Vendor=");
             postRequest.Append(configuration.VendorName);
             postRequest.Append("&VendorTxCode=" + payment.lss_vendortxcode);
             postRequest.Append("&Amount=" + payment.lss_amount.Value.ToString("#.##"));
@@ -240,21 +240,30 @@ The Error is: " + webException;
 
             contactDetails.Append("&BillingSurname=" + (String.IsNullOrEmpty(contact.LastName) ? String.Empty : contact.LastName));
             contactDetails.Append("&BillingFirstnames=" + (String.IsNullOrEmpty(contact.FirstName) ? String.Empty : contact.FirstName));
-            contactDetails.Append("&BillingAddress1=" + (String.IsNullOrEmpty(contact.Address1_Line1) ? String.Empty : contact.Address1_Line1));
-            contactDetails.Append("&BillingAddress2=" + (String.IsNullOrEmpty(contact.Address1_Line2) ? String.Empty : contact.Address1_Line2));
+            contactDetails.Append("&BillingAddress1=" + (String.IsNullOrEmpty(contact.Address1_Line1) ? String.Empty : MaxLength(contact.Address1_Line1,50)));
+            contactDetails.Append("&BillingAddress2=" + (String.IsNullOrEmpty(contact.Address1_Line2) ? String.Empty : MaxLength(contact.Address1_Line2,50)));
             contactDetails.Append("&BillingCity=" + (String.IsNullOrEmpty(contact.Address1_City) ? String.Empty : contact.Address1_City));
             contactDetails.Append("&BillingPostCode=" + (String.IsNullOrEmpty(contact.Address1_PostalCode) ? String.Empty : contact.Address1_PostalCode));
             contactDetails.Append("&BillingCountry=GB");
 
             contactDetails.Append("&DeliverySurname=" + (String.IsNullOrEmpty(contact.LastName) ? String.Empty : contact.LastName));
             contactDetails.Append("&DeliveryFirstnames=" + (String.IsNullOrEmpty(contact.FirstName) ? String.Empty : contact.FirstName));
-            contactDetails.Append("&DeliveryAddress1=" + (String.IsNullOrEmpty(contact.Address1_Line1) ? String.Empty : contact.Address1_Line1));
-            contactDetails.Append("&DeliveryAddress2=" + (String.IsNullOrEmpty(contact.Address1_Line2) ? String.Empty : contact.Address1_Line2));
+            contactDetails.Append("&DeliveryAddress1=" + (String.IsNullOrEmpty(contact.Address1_Line1) ? String.Empty : MaxLength(contact.Address1_Line1,50)));
+            contactDetails.Append("&DeliveryAddress2=" + (String.IsNullOrEmpty(contact.Address1_Line2) ? String.Empty : MaxLength(contact.Address1_Line2,50)));
             contactDetails.Append("&DeliveryCity=" + (String.IsNullOrEmpty(contact.Address1_City) ? String.Empty : contact.Address1_City));
             contactDetails.Append("&DeliveryPostCode=" + (String.IsNullOrEmpty(contact.Address1_PostalCode) ? String.Empty : contact.Address1_PostalCode));
             contactDetails.Append("&DeliveryCountry=GB");
 
             return contactDetails.ToString();
+        }
+
+
+        private static string MaxLength(string value, int length)
+        {
+            if (value.Length < length) return value;
+
+            value = value.Substring(0, length);
+            return value;
         }
 
         /// <summary>

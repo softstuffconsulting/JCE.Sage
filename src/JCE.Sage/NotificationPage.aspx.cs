@@ -70,9 +70,12 @@ namespace JCE.Sage
                 }
 
                 // Rebuild the post message, so we can then hash it with the security key, and then check against VPSSignature
-                string postMessage = vpstxId + vendorTxCode + payment.lss_notificationstatus + payment.lss_txauthno.ToString() + configuration.VendorName + payment.lss_avscv2 + payment.lss_securitykey +
+                string postMessage = vpstxId + vendorTxCode + payment.lss_notificationstatus + payment.lss_txauthno.ToString() + configuration.VendorName.ToLower() + payment.lss_avscv2 + payment.lss_securitykey +
                     payment.lss_addressresult + payment.lss_postcoderesult + payment.lss_cv2result + payment.lss_giftaid + payment.lss_securestatus3d + payment.lss_cavv +
-                    payment.lss_addressstatus + payment.lss_payerstatus + payment.lss_cardtype + payment.lss_last4digits;
+                    payment.lss_addressstatus + payment.lss_payerstatus + payment.lss_cardtype + payment.lss_last4digits+payment.tal_declinecode+payment.tal_expirydate+payment.tal_fraudresponse+payment.tal_bankauthcode +
+                    payment.tal_acstransid+payment.tal_acstransid+payment.tal_dstransid+payment.tal_schemetraceid;
+
+               
 
                 string hashedPostMessage = FormsAuthentication.HashPasswordForStoringInConfigFile(postMessage, "MD5");
                 if (payment.lss_vpssignature != hashedPostMessage)
@@ -161,6 +164,14 @@ namespace JCE.Sage
             payment.lss_payerstatus = Request.Form["PayerStatus"];
             payment.lss_cardtype = Request.Form["CardType"];
             payment.lss_last4digits = Request.Form["Last4Digits"];
+
+            payment.tal_declinecode = Request.Form["DeclineCode"];
+            payment.tal_expirydate = Request.Form["ExpiryDate"];
+            payment.tal_fraudresponse = Request.Form["FraudResponse"];
+            payment.tal_bankauthcode = Request.Form["BankAuthCode"];
+            payment.tal_acstransid = Request.Form["ACSTransID"];
+            payment.tal_dstransid = Request.Form["DSTransID"];
+            payment.tal_schemetraceid = Request.Form["SchemeTraceID"];
         }
 
         /// <summary>
