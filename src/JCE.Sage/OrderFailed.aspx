@@ -36,8 +36,8 @@
         function windowClose() {
             var o = new Object();
             o.status = "An error occurred.";
-            window.returnValue = o;
-            window.close();
+            window.returnValue = o;            
+            window.parent.postMessage("close", "*"); 
         }</script>
     <form id="form1" runat="server">
     <div>

@@ -52,7 +52,7 @@
          <h3 class="style4">
             Please click Ok to close to window.</h3>
         <div style="text-align: center">
-            <input type="button" onclick="javascript:windowClose()" value="Ok" 
+            <input type="button" onclick="javascript:windowClose();" value="Ok" 
                 style="width:100px; font-weight: 700; background-color: #D7D7D7;" />
         </div>
     </div>

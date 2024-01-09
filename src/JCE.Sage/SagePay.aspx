@@ -5,7 +5,19 @@
 <head runat="server">
     <title></title>
 </head>
-<body style="overflow:hidden">
+<body style="overflow:hidden" onload="go()">
     <asp:HtmlIframe id="sagepay" src="" width="690px" height="690px" runat="server"></asp:HtmlIframe>
-</body>
+
+    <script type="text/javascript">
+        function go() {
+
+            window.addEventListener("message", receiveMessage, false);
+        }
+
+        function receiveMessage() {
+            window.open('', '_self', '');
+            window.close();
+        }
+    </script>
+    </body>
 </html>
